@@ -18,6 +18,8 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
 .nav-item.active{background:rgba(255,255,255,.13);color:#fff;border-left-color:var(--gold)}
 .nav-caldeira{border-left-color:#e65100!important}
 .nav-caldeira.active{background:rgba(230,81,0,.25)!important}
+.nav-critico{border-left-color:#c62828!important}
+.nav-critico.active{background:rgba(198,40,40,.22)!important}
 .nav-icon{font-size:15px;width:20px;text-align:center}
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden}
 .topbar{background:#fff;border-bottom:1px solid var(--border);padding:0 24px;height:52px;display:flex;align-items:center;flex-shrink:0}
@@ -64,6 +66,7 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
   <div class="nav-label">Menu</div>
   <div class="nav-item active"     onclick="goView('visao',this)"><span class="nav-icon">📊</span> Visão Geral</div>
   <div class="nav-item nav-caldeira" onclick="goView('caldeira',this)"><span class="nav-icon">🔥</span> Caldeira de CO</div>
+  <div class="nav-item nav-critico" onclick="goView('criticos',this)"><span class="nav-icon">⚠</span> Caminho Crítico</div>
   <div class="nav-item"            onclick="goView('equip',this)"><span class="nav-icon">⚙</span> Equipamentos</div>
   <div class="nav-item"            onclick="goView('ppu',this)"><span class="nav-icon">📄</span> Itens PPU</div>
   <div class="nav-item"            onclick="goView('pesos',this)"><span class="nav-icon">⚖</span> Pesos Verbas</div>
@@ -81,24 +84,59 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
 
     <!-- VISÃO GERAL -->
     <div id="view-visao" class="view active">
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:16px;margin-bottom:24px">
+
+      <!-- Objeto do Contrato -->
+      <div style="background:#fff;border:1px solid var(--border);border-left:5px solid var(--navy);border-radius:8px;padding:16px 20px;margin-bottom:20px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Objeto do Contrato — Licitação Nº 7004601631</div>
+        <div style="font-size:14px;color:var(--text);line-height:1.7;font-weight:500">
+          Serviços de manutenção de <strong>Caldeira de Monóxido de Carbono (CO)</strong>, Fornos, Tocha e equipamentos auxiliares e fornecimento de partes e peças em <strong>Parada de Manutenção</strong> na Refinaria Presidente Bernardes — Cubatão/SP.
+        </div>
+        <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;font-size:11.5px;color:#555">
+          <span style="background:#f0f3fc;padding:3px 10px;border-radius:12px"><strong>Refinaria:</strong> RPBC — Presidente Bernardes (Cubatão/SP)</span>
+          <span style="background:#f0f3fc;padding:3px 10px;border-radius:12px"><strong>Unidade:</strong> UFCC + TOCHA 3 / TE</span>
+          <span style="background:#f0f3fc;padding:3px 10px;border-radius:12px"><strong>Regime:</strong> Empreitada por Preço Unitário</span>
+          <span style="background:#f0f3fc;padding:3px 10px;border-radius:12px"><strong>Critério:</strong> Menor Preço por Total</span>
+          <span style="background:#f0f3fc;padding:3px 10px;border-radius:12px"><strong>Pré-Qualificação:</strong> 7003380464</span>
+          <span style="background:#fff3e0;padding:3px 10px;border-radius:12px;color:#e65100"><strong>Abertura de Proposta:</strong> 02/07/2026</span>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-bottom:20px">
         <div class="kpi-card"><div class="kpi-val">17</div><div class="kpi-label">Equipamentos no Escopo</div></div>
-        <div class="kpi-card" style="border-top-color:#3d4a7c"><div class="kpi-val">181</div><div class="kpi-label">Atividades Caldeira (GV-513270)</div></div>
-        <div class="kpi-card" style="border-top-color:#e65100"><div class="kpi-val">251</div><div class="kpi-label">Notas de Fornos</div></div>
-        <div class="kpi-card" style="border-top-color:#c62828"><div class="kpi-val">32</div><div class="kpi-label">Notas de Tochas</div></div>
+        <div class="kpi-card" style="border-top-color:#3d4a7c"><div class="kpi-val">181</div><div class="kpi-label">Atividades — Caldeira de CO</div></div>
+        <div class="kpi-card" style="border-top-color:#e65100"><div class="kpi-val">251</div><div class="kpi-label">Atividades — Fornos</div></div>
+        <div class="kpi-card" style="border-top-color:#c62828"><div class="kpi-val">32</div><div class="kpi-label">Atividades — Tochas</div></div>
         <div class="kpi-card" style="border-top-color:#e8b84b"><div class="kpi-val">R$ 2.10M</div><div class="kpi-label">Valor Estimado PPU</div></div>
         <div class="kpi-card"><div class="kpi-val">74</div><div class="kpi-label">Itens PPU</div></div>
         <div class="kpi-card"><div class="kpi-val">52</div><div class="kpi-label">Critérios de Medição</div></div>
+        <div class="kpi-card" style="border-top-color:#4527a0"><div class="kpi-val">2</div><div class="kpi-label">Equipamentos com SGM</div></div>
       </div>
+
+      <!-- Tabela resumo por equipamento -->
+      <div class="card" style="margin-bottom:20px">
+        <div class="card-header"><div class="card-title">Resumo por Equipamento</div></div>
+        <table class="tbl">
+          <thead><tr><th>TAG</th><th>Tipo</th><th>Área</th><th class="num">Peso</th><th>Principais Serviços</th></tr></thead>
+          <tbody>
+            <tr style="background:#f5f5ff"><td><strong>GV-513270</strong></td><td><span class="tipo-badge tipo-caldeira">Caldeira de CO</span></td><td>UFCC</td><td class="num"><strong>15%</strong></td><td style="font-size:11.5px">Inspeção NR-13 completa · Subst. Superaquecedor · Subst. Tubulões + Boiler Bank · Teste Hidrostático 65 kg/cm²</td></tr>
+            <tr><td><strong>L-2403</strong></td><td><span class="tipo-badge tipo-forno">Forno</span></td><td>UFCC/CRA</td><td class="num"><strong>13%</strong></td><td style="font-size:11.5px">Subst. módulo completo da Convecção · ME chaminé (24 pts) · Reparos refratário radiação</td></tr>
+            <tr><td><strong>L-2503B</strong></td><td><span class="tipo-badge tipo-forno">Forno</span></td><td>UN/DES</td><td class="num"><strong>13%</strong></td><td style="font-size:11.5px"><span class="sgm-badge">SGM</span> Subst. total chaparia e revestimento Convecção · Suportes tipo preguiça · Alpinismo</td></tr>
+            <tr><td><strong>TU-2000-47</strong></td><td><span class="tipo-badge tipo-tubulacao">Tubulação OFF-Site</span></td><td>TOCHA 3/TE</td><td class="num"><strong>17%</strong></td><td style="font-size:11.5px">156 atividades · Subst. trechos c/ baixa espessura · Alpinismo nos pipe-racks · Abertura de flanges</td></tr>
+            <tr><td><strong>L-2503A</strong></td><td><span class="tipo-badge tipo-forno">Forno</span></td><td>UN/DES</td><td class="num"><strong>10%</strong></td><td style="font-size:11.5px"><span class="sgm-badge">SGM</span> Subst. suportes tipo preguiça · Alpinismo · Pré-teste hidrostático</td></tr>
+            <tr><td><strong>L-2404A</strong></td><td><span class="tipo-badge tipo-tocha">Tocha III</span></td><td>TE</td><td class="num"><strong>5%</strong></td><td style="font-size:11.5px">Subst. carretel DN 42" (8500mm) · Subst. plataforma completa · Subst. ponteira queimadora · Alpinismo</td></tr>
+            <tr><td><strong>L-2404B</strong></td><td><span class="tipo-badge tipo-tocha">Tocha III</span></td><td>TE</td><td class="num"><strong>5%</strong></td><td style="font-size:11.5px">Subst. carretel DN 42" (8500mm) · Subst. ponteira queimadora · Alpinismo</td></tr>
+            <tr><td><strong>L-2405</strong></td><td><span class="tipo-badge tipo-tocha">Tocha III</span></td><td>TE</td><td class="num"><strong>5%</strong></td><td style="font-size:11.5px">ME em 16 regiões · Subst. 3 pilotos · LP nas soldas · Alpinismo</td></tr>
+            <tr><td><strong>P-2409</strong></td><td><span class="tipo-badge tipo-tanque">Tanque</span></td><td>TOCHA 3/TE</td><td class="num"><strong>3%</strong></td><td style="font-size:11.5px">Abertura BV · ME interna e externa (15 regiões) · Pintura geral</td></tr>
+            <tr><td><span style="color:#888;font-size:11px">O-146, O-24128, O-24129, O-24130A/B, O-2435, O-2436</span></td><td><span class="tipo-badge tipo-vaso">Vaso</span></td><td>TOCHA 3/TE</td><td class="num"><strong>2% cada</strong></td><td style="font-size:11.5px">END (PM+US) · Reparos com solda · PSVs para manutenção e calibração</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Donut -->
       <div class="card">
         <div class="card-header"><div class="card-title">Distribuição por Tipo (% do Contrato)</div></div>
         <div style="padding:20px"><div style="display:flex;align-items:center;gap:28px;flex-wrap:wrap"><svg viewBox="0 0 200 200" style="width:180px;height:180px"><path d="M 100.00 20.00 A 80 80 0 0 1 132.35 173.17 L 119.41 143.90 A 48 48 0 0 0 100.00 52.00 Z" fill="#3d4a7c" stroke="white" stroke-width="1.5"/><path d="M 132.35 173.17 A 80 80 0 0 1 47.30 160.19 L 68.38 136.11 A 48 48 0 0 0 119.41 143.90 Z" fill="#e65100" stroke="white" stroke-width="1.5"/><path d="M 47.30 160.19 A 80 80 0 0 1 23.20 77.59 L 53.92 86.56 A 48 48 0 0 0 68.38 136.11 Z" fill="#c62828" stroke="white" stroke-width="1.5"/><path d="M 23.20 77.59 A 80 80 0 0 1 81.99 22.05 L 89.19 53.23 A 48 48 0 0 0 53.92 86.56 Z" fill="#1565c0" stroke="white" stroke-width="1.5"/><path d="M 81.99 22.05 A 80 80 0 0 1 100.00 20.00 L 100.00 52.00 A 48 48 0 0 0 89.19 53.23 Z" fill="#6a1b9a" stroke="white" stroke-width="1.5"/><path d="M 100.00 20.00 A 80 80 0 0 1 100.00 20.00 L 100.00 52.00 A 48 48 0 0 0 100.00 52.00 Z" fill="#00695c" stroke="white" stroke-width="1.5"/><path d="M 100.00 20.00 A 80 80 0 0 1 100.00 20.00 L 100.00 52.00 A 48 48 0 0 0 100.00 52.00 Z" fill="#e8b84b" stroke="white" stroke-width="1.5"/><text x="100" y="94" text-anchor="middle" font-size="22" font-weight="700" fill="#3d4a7c">17</text><text x="100" y="114" text-anchor="middle" font-size="10" fill="#666">equipamentos</text></svg><div style="display:flex;flex-direction:column;justify-content:center"><div style="display:flex;align-items:center;gap:6px;margin-bottom:5px"><div style="width:12px;height:12px;border-radius:2px;background:#3d4a7c;flex-shrink:0"></div><span style="font-size:11.5px">FORNO <strong>36%</strong> (3)</span></div><div style="display:flex;align-items:center;gap:6px;margin-bottom:5px"><div style="width:12px;height:12px;border-radius:2px;background:#e65100;flex-shrink:0"></div><span style="font-size:11.5px">CALDEIRA DE CO <strong>15%</strong> (1)</span></div><div style="display:flex;align-items:center;gap:6px;margin-bottom:5px"><div style="width:12px;height:12px;border-radius:2px;background:#c62828;flex-shrink:0"></div><span style="font-size:11.5px">TOCHA <strong>15%</strong> (3)</span></div><div style="display:flex;align-items:center;gap:6px;margin-bottom:5px"><div style="width:12px;height:12px;border-radius:2px;background:#1565c0;flex-shrink:0"></div><span style="font-size:11.5px">VASO <strong>14%</strong> (7)</span></div><div style="display:flex;align-items:center;gap:6px;margin-bottom:5px"><div style="width:12px;height:12px;border-radius:2px;background:#6a1b9a;flex-shrink:0"></div><span style="font-size:11.5px">TANQUE <strong>3%</strong> (1)</span></div><div style="display:flex;align-items:center;gap:6px;margin-bottom:5px"><div style="width:12px;height:12px;border-radius:2px;background:#00695c;flex-shrink:0"></div><span style="font-size:11.5px">Tubulação OFF-Site <strong>0%</strong> (1)</span></div><div style="display:flex;align-items:center;gap:6px;margin-bottom:5px"><div style="width:12px;height:12px;border-radius:2px;background:#e8b84b;flex-shrink:0"></div><span style="font-size:11.5px">Tocha <strong>0%</strong> (1)</span></div></div></div></div>
-      </div>
-      <div class="info-box">
-        <strong>Refinaria:</strong> RPBC — Presidente Bernardes (Cubatão/SP) &nbsp;|&nbsp;
-        <strong>Unidade:</strong> UFCC + TOCHA 3 &nbsp;|&nbsp;
-        <strong>Escopo:</strong> Caldeira de CO · Fornos CRA/UN · Tocha III &nbsp;|&nbsp;
-        <strong>Licitação:</strong> 7004601631
       </div>
     </div>
 
@@ -585,6 +623,273 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
 <tr style=""><td style="color:#bbb;font-size:11px">7</td><td style="font-size:12.5px;line-height:1.55">Pintar trecho da linha de transporte que passa pela canaleta da rua U.</td><td style="text-align:center"></td></tr>
 <tr style="background:#fff8f8"><td style="color:#bbb;font-size:11px">8</td><td style="font-size:12.5px;line-height:1.55">Executar as recomendações do GT de sólidos do PP-2401, conforme listado a seguir: i. Remover todo o isolamento térmico da região cônica acima das moegas para possibilitar inspeção  das serpentinas de vapor. ii. Executar teste hidrostático das serpentinas com 5kgf/cm².</td><td style="text-align:center"><span style="color:#c62828;font-size:16px;font-weight:bold" title="Atividade crítica">⚑</span></td></tr>
 <tr style="background:#fff8f8"><td style="color:#bbb;font-size:11px">9</td><td style="font-size:12.5px;line-height:1.55">Efetuar substituição, de acordo com o projeto, dos tubos de respiro/suspiro na parte inferior do  precipitador, de acordo com indicação no campo pela inspeção.</td><td style="text-align:center"><span style="color:#c62828;font-size:16px;font-weight:bold" title="Atividade crítica">⚑</span></td></tr>
+</tbody></table></div>
+    </div>
+
+    <!-- CAMINHO CRÍTICO -->
+    <div id="view-criticos" class="view">
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:#c62828;margin-bottom:20px">
+        ⚠ Caminho Crítico — Demais Equipamentos
+      </h2>
+      
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:24px">
+  <div class="kpi-card" style="border-top-color:#c62828"><div class="kpi-val">11</div><div class="kpi-label">Equipamentos com Escopo Crítico</div></div>
+  <div class="kpi-card" style="border-top-color:#e65100"><div class="kpi-val">6</div><div class="kpi-label">Prioridade Alta / Altíssima</div></div>
+  <div class="kpi-card" style="border-top-color:#4527a0"><div class="kpi-val">2</div><div class="kpi-label">Requerem SGM</div></div>
+  <div class="kpi-card" style="border-top-color:#00695c"><div class="kpi-val">6</div><div class="kpi-label">Requerem Alpinismo</div></div>
+  <div class="kpi-card"><div class="kpi-val">47</div><div class="kpi-label">Atividades Críticas Mapeadas</div></div>
+</div>
+<div class="info-box" style="background:#fff8f8;border-left-color:#c62828;margin-bottom:20px">
+  <strong>⚠ Critérios de identificação do Caminho Crítico:</strong><br>
+  🔴 <strong>SGM</strong> — exige emissão prévia de Solicitação de Garantia de Material (aprovação Petrobras, impacto direto no caminho crítico)<br>
+  🧗 <strong>Alpinismo</strong> — acesso estrutural por equipe especializada (planejamento específico de SMS e equipamentos)<br>
+  🔧 <strong>Substituição integral</strong> — peças/estruturas de grande porte que dependem de projeto e material aprovado<br>
+  ⚠ <strong>Teste Hidrostático</strong> — atividade de encerramento que bloqueia liberação do equipamento
+</div>
+
+<div class="card" style="margin-bottom:16px;border-left:4px solid #c62828">
+  <div class="card-header" style="background:#fafbff">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <strong style="font-size:16px;color:#c62828">L-2503B</strong>
+        <span class="tipo-badge tipo-forno">Forno</span>
+        <span style="font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:10px;background:#ffebee;color:#b71c1c;border:1px solid #ef9a9a">Altíssima</span>
+        <span class="sgm-badge" style="margin-left:6px">SGM</span><span style="background:#e0f2f1;color:#00695c;border:1px solid #80cbc4;font-size:10px;font-weight:700;padding:1px 7px;border-radius:8px;margin-left:4px">ALPINISMO</span>
+        <span style="font-size:11px;color:#888">Peso: <strong>13%</strong> &nbsp;|&nbsp; Área: UN/DES</span>
+      </div>
+      <div style="margin-top:6px;font-size:12px;color:#555;line-height:1.5">Maior complexidade entre os fornos: 2 SGMs independentes + substituição total de chaparia e revestimento da Convecção</div>
+    </div>
+  </div>
+  <table class="tbl">
+    <thead><tr><th style="width:100px">Tipo</th><th>Atividade / Serviço Crítico</th></tr></thead>
+    <tbody>
+<tr style="background:#fff5f5"><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔴 SGM</span></td><td style="font-size:12.5px;line-height:1.55">SGM para substituição dos suportes auxiliares (tipo preguiça) externos ao fundo do forno nas vigas circunferenciais de sustentação dos espelhos inferiores da radiação</td></tr>
+<tr style="background:#fff5f5"><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔴 SGM</span></td><td style="font-size:12.5px;line-height:1.55">SGM para modificação do revestimento térmico interno da Convecção para módulos pré-moldados — substituição total de chaparia e revestimento conforme projeto original</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🧗 Alpinismo</span></td><td style="font-size:12.5px;line-height:1.55">Primeiro acesso ao interior deve ser feito pela IE por alpinismo com supervisão — teste de integridade estrutural do sistema de sustentação da camisa da Convecção</td></tr>
+<tr style="background:#fff5f5"><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔧 Substituição</span></td><td style="font-size:12.5px;line-height:1.55">Substituir toda a chaparia e revestimento refratário da Convecção conforme SGM ou Projeto original</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔬 Ensaio Estrutural</span></td><td style="font-size:12.5px;line-height:1.55">LP nas soldas das orelhas de fixação dos tirantes do sistema de suportação da camisa da Convecção (08 orelhas)</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">💧 Pré-teste</span></td><td style="font-size:12.5px;line-height:1.55">Pré-teste hidrostático para identificação de vazamentos em mandrilagens, plugues, corpo dos cabeçotes e tubulações da radiação e convecção</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔩 Selagem</span></td><td style="font-size:12.5px;line-height:1.55">Selar com solda externamente as mandrilagens dos tubos não estanques ou com indícios de vazamento</td></tr>
+</tbody></table></div>
+
+<div class="card" style="margin-bottom:16px;border-left:4px solid #e65100">
+  <div class="card-header" style="background:#fafbff">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <strong style="font-size:16px;color:#e65100">L-2503A</strong>
+        <span class="tipo-badge tipo-forno">Forno</span>
+        <span style="font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:10px;background:#fff3e0;color:#e65100;border:1px solid #ffcc80">Alta</span>
+        <span class="sgm-badge" style="margin-left:6px">SGM</span><span style="background:#e0f2f1;color:#00695c;border:1px solid #80cbc4;font-size:10px;font-weight:700;padding:1px 7px;border-radius:8px;margin-left:4px">ALPINISMO</span>
+        <span style="font-size:11px;color:#888">Peso: <strong>10%</strong> &nbsp;|&nbsp; Área: UN/DES</span>
+      </div>
+      <div style="margin-top:6px;font-size:12px;color:#555;line-height:1.5">1 SGM para suportes + primeiro acesso por alpinismo com supervisão IE</div>
+    </div>
+  </div>
+  <table class="tbl">
+    <thead><tr><th style="width:100px">Tipo</th><th>Atividade / Serviço Crítico</th></tr></thead>
+    <tbody>
+<tr style="background:#fff5f5"><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔴 SGM</span></td><td style="font-size:12.5px;line-height:1.55">SGM para substituição dos suportes auxiliares (tipo preguiça) externos ao fundo do forno nas posições das vigas circunferenciais de sustentação dos espelhos inferiores da radiação</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🧗 Alpinismo</span></td><td style="font-size:12.5px;line-height:1.55">Primeiro acesso ao interior deve ser feito pela IE por alpinismo com supervisão — teste de integridade estrutural do sistema de sustentação da camisa da Convecção</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔬 Ensaio Estrutural</span></td><td style="font-size:12.5px;line-height:1.55">LP nas soldas das orelhas de fixação dos tirantes do sistema de suportação da camisa da Convecção (08 orelhas)</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">💧 Pré-teste</span></td><td style="font-size:12.5px;line-height:1.55">Pré-teste hidrostático para identificação de vazamentos em mandrilagens, plugues, corpo dos cabeçotes e tubulações da radiação e convecção</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔩 Selagem</span></td><td style="font-size:12.5px;line-height:1.55">Selar com solda externamente as mandrilagens dos tubos não estanques ou com indícios de vazamento</td></tr>
+</tbody></table></div>
+
+<div class="card" style="margin-bottom:16px;border-left:4px solid #e65100">
+  <div class="card-header" style="background:#fafbff">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <strong style="font-size:16px;color:#e65100">L-2403</strong>
+        <span class="tipo-badge tipo-forno">Forno</span>
+        <span style="font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:10px;background:#fff3e0;color:#e65100;border:1px solid #ffcc80">Alta</span>
+        
+        <span style="font-size:11px;color:#888">Peso: <strong>13%</strong> &nbsp;|&nbsp; Área: UFCC/CRA</span>
+      </div>
+      <div style="margin-top:6px;font-size:12px;color:#555;line-height:1.5">Substituição do módulo completo da Convecção + avaliação de corrosão alveolar nos tubos da radiação</div>
+    </div>
+  </div>
+  <table class="tbl">
+    <thead><tr><th style="width:100px">Tipo</th><th>Atividade / Serviço Crítico</th></tr></thead>
+    <tbody>
+<tr style="background:#fff5f5"><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔧 Substituição</span></td><td style="font-size:12.5px;line-height:1.55">Substituir o módulo completo da Convecção incluindo: curvas, tubos, espelhos, caixa refratada, tampas das curvas, etc.</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔍 Avaliação</span></td><td style="font-size:12.5px;line-height:1.55">Avaliar corrosão alveolar nos tubos da serpentina da radiação, com atenção aos passos C e D do lado oeste do forno — alvéolos variando entre 1,2 e 2,0 mm de profundidade</td></tr>
+<tr style="background:#fff5f5"><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔧 Substituição</span></td><td style="font-size:12.5px;line-height:1.55">Remover para inspeção e substituir um trecho de 6.000 mm de tubo da radiação conforme indicação do IE — usar tubo adquirido via estoque</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🏭 Chaminé</span></td><td style="font-size:12.5px;line-height:1.55">Medir espessura em 24 pontos de controle na chaminé (grau de preparação GL-3) + inspeção externa geral</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🧱 Refrataŕio</span></td><td style="font-size:12.5px;line-height:1.55">Reparos no revestimento refratário da parede da radiação (4 m²) e teto da radiação (2 m²)</td></tr>
+</tbody></table></div>
+
+<div class="card" style="margin-bottom:16px;border-left:4px solid #e65100">
+  <div class="card-header" style="background:#fafbff">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <strong style="font-size:16px;color:#e65100">L-2404A</strong>
+        <span class="tipo-badge tipo-outros">Tocha III</span>
+        <span style="font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:10px;background:#fff3e0;color:#e65100;border:1px solid #ffcc80">Alta</span>
+        <span style="background:#e0f2f1;color:#00695c;border:1px solid #80cbc4;font-size:10px;font-weight:700;padding:1px 7px;border-radius:8px;margin-left:4px">ALPINISMO</span>
+        <span style="font-size:11px;color:#888">Peso: <strong>5%</strong> &nbsp;|&nbsp; Área: TE</span>
+      </div>
+      <div style="margin-top:6px;font-size:12px;color:#555;line-height:1.5">Substituição integral de carretel DN 42&quot; (~8500mm) + plataforma completa + ponteira queimadora (alpinismo)</div>
+    </div>
+  </div>
+  <table class="tbl">
+    <thead><tr><th style="width:100px">Tipo</th><th>Atividade / Serviço Crítico</th></tr></thead>
+    <tbody>
+<tr style="background:#fff5f5"><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔧 Substituição</span></td><td style="font-size:12.5px;line-height:1.55">Substituir carretel flangeado em aço carbono DN 42&quot; com cerca de 8500 mm de comprimento sob a ponteira queimadora conforme ENG.° 9/L-2404/003</td></tr>
+<tr style="background:#fff5f5"><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔧 Substituição</span></td><td style="font-size:12.5px;line-height:1.55">Substituir integralmente todos os pisos da plataforma superior sob as ponteiras queimadoras, grades e guarda-corpos — prevendo também substituição de vigas de apoio, degraus das escadas de marinheiro e reforço do pau-de-carga</td></tr>
+<tr style="background:#fff5f5"><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔧 Substituição</span></td><td style="font-size:12.5px;line-height:1.55">Substituir integralmente a ponteira queimadora com jogo de 04 pilotos, conexões e suportes conforme ENG.° 1/L-2404/078</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🧗 Alpinismo</span></td><td style="font-size:12.5px;line-height:1.55">Toda inspeção e reparos da base da tocha e coluna da chaminé por equipe de alpinismo — medição de espessura em 04 regiões na base e cone de transição</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🎨 Pintura</span></td><td style="font-size:12.5px;line-height:1.55">Tratar superfície e efetuar reparos de pintura na cor verde bandeira por toda base e coluna da chaminé L-2404A conforme normas Petrobras</td></tr>
+</tbody></table></div>
+
+<div class="card" style="margin-bottom:16px;border-left:4px solid #e65100">
+  <div class="card-header" style="background:#fafbff">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <strong style="font-size:16px;color:#e65100">L-2404B</strong>
+        <span class="tipo-badge tipo-outros">Tocha III</span>
+        <span style="font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:10px;background:#fff3e0;color:#e65100;border:1px solid #ffcc80">Alta</span>
+        <span style="background:#e0f2f1;color:#00695c;border:1px solid #80cbc4;font-size:10px;font-weight:700;padding:1px 7px;border-radius:8px;margin-left:4px">ALPINISMO</span>
+        <span style="font-size:11px;color:#888">Peso: <strong>5%</strong> &nbsp;|&nbsp; Área: TE</span>
+      </div>
+      <div style="margin-top:6px;font-size:12px;color:#555;line-height:1.5">Substituição de carretel DN 42&quot; + ponteira queimadora via SGM interno + alpinismo</div>
+    </div>
+  </div>
+  <table class="tbl">
+    <thead><tr><th style="width:100px">Tipo</th><th>Atividade / Serviço Crítico</th></tr></thead>
+    <tbody>
+<tr style="background:#fff5f5"><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔧 Substituição</span></td><td style="font-size:12.5px;line-height:1.55">Substituir carretel flangeado em aço carbono DN 42&quot; com cerca de 8500 mm de comprimento sob a ponteira queimadora conforme ENG.° 9/L-2404/003</td></tr>
+<tr style="background:#fff5f5"><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔧 Substituição</span></td><td style="font-size:12.5px;line-height:1.55">Substituir integralmente a ponteira queimadora com jogo de 04 pilotos, anel de vapor, conexões e suportes (atentar para última revisão do projeto via SGM para instalação de sistema smokeless)</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🧗 Alpinismo</span></td><td style="font-size:12.5px;line-height:1.55">Toda inspeção e reparos da base da tocha e coluna da chaminé por equipe de alpinismo — medição de espessura em 04 regiões na base e cone de transição da L-2404B</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🎨 Pintura</span></td><td style="font-size:12.5px;line-height:1.55">Tratar superfície e efetuar reparos de pintura na cor amarelo bandeira por toda base e coluna da chaminé L-2404B conforme normas Petrobras</td></tr>
+</tbody></table></div>
+
+<div class="card" style="margin-bottom:16px;border-left:4px solid #e65100">
+  <div class="card-header" style="background:#fafbff">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <strong style="font-size:16px;color:#e65100">TU-2000-47</strong>
+        <span class="tipo-badge tipo-outros">Tubulação OFF-Site</span>
+        <span style="font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:10px;background:#fff3e0;color:#e65100;border:1px solid #ffcc80">Alta</span>
+        <span style="background:#e0f2f1;color:#00695c;border:1px solid #80cbc4;font-size:10px;font-weight:700;padding:1px 7px;border-radius:8px;margin-left:4px">ALPINISMO</span>
+        <span style="font-size:11px;color:#888">Peso: <strong>17%</strong> &nbsp;|&nbsp; Área: TOCHA 3/TE</span>
+      </div>
+      <div style="margin-top:6px;font-size:12px;color:#555;line-height:1.5">Maior peso do contrato (17%): 156 atividades incluindo substituições de trechos com baixa espessura, alpinismo em pipe-racks e múltiplas aberturas de flanges</div>
+    </div>
+  </div>
+  <table class="tbl">
+    <thead><tr><th style="width:100px">Tipo</th><th>Atividade / Serviço Crítico</th></tr></thead>
+    <tbody>
+<tr style="background:#fff5f5"><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔧 Substituição</span></td><td style="font-size:12.5px;line-height:1.55">Substituir e selar com solda trechos com baixa espessura junto às BV1 e BV2 na intersecção com a linha tronco — locais indicados nos isométricos</td></tr>
+<tr style="background:#fff5f5"><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔧 Substituição</span></td><td style="font-size:12.5px;line-height:1.55">Substituir e selar com solda o trecho com caixa selada provisória (local de vazamento em campânula) — selar conexões roscadas eventualmente identificadas na região</td></tr>
+<tr style="background:#fff5f5"><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔧 Substituição</span></td><td style="font-size:12.5px;line-height:1.55">Substituir trecho com vários alvéolos profundos e baixa espessura — selar com solda eventuais conexões roscadas na região</td></tr>
+<tr style="background:#fff5f5"><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔧 Substituição</span></td><td style="font-size:12.5px;line-height:1.55">Substituir e selar com solda o bloqueio e conex. de tomada para steam-trace com vazamento no pipe-rack Rua &quot;J&quot;</td></tr>
+<tr style="background:#fff5f5"><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔧 Substituição</span></td><td style="font-size:12.5px;line-height:1.55">Substituir e selar com solda o suporte tipo patim corroído no trecho de pipe-rack pela Av. dos Tanques</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🧗 Alpinismo</span></td><td style="font-size:12.5px;line-height:1.55">Inspecionar por alpinismo (ou andaimes + cabo-guia) em trechos do pipe-rack nas Ruas U, W, G, B, J, M e Av. dos Tanques — em pré-parada</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🚪 Abertura</span></td><td style="font-size:12.5px;line-height:1.55">Abrir todas as conexões demarcadas nos isométricos para avaliação das sedes de vedação e inspeção interna da linha tronco (múltiplos pontos)</td></tr>
+</tbody></table></div>
+
+<div class="card" style="margin-bottom:16px;border-left:4px solid #f9a825">
+  <div class="card-header" style="background:#fafbff">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <strong style="font-size:16px;color:#f9a825">L-2405</strong>
+        <span class="tipo-badge tipo-outros">Tocha III</span>
+        <span style="font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:10px;background:#fffde7;color:#f57f17;border:1px solid #fff176">Média</span>
+        <span style="background:#e0f2f1;color:#00695c;border:1px solid #80cbc4;font-size:10px;font-weight:700;padding:1px 7px;border-radius:8px;margin-left:4px">ALPINISMO</span>
+        <span style="font-size:11px;color:#888">Peso: <strong>5%</strong> &nbsp;|&nbsp; Área: TE</span>
+      </div>
+      <div style="margin-top:6px;font-size:12px;color:#555;line-height:1.5">Medição de espessura em 16 regiões + substituição de pilotos + reparos por alpinismo</div>
+    </div>
+  </div>
+  <table class="tbl">
+    <thead><tr><th style="width:100px">Tipo</th><th>Atividade / Serviço Crítico</th></tr></thead>
+    <tbody>
+<tr style="background:#fff5f5"><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔧 Substituição</span></td><td style="font-size:12.5px;line-height:1.55">Substituir jogo de 03 pilotos, conexões e suportes conforme ENG.° 1/L-2405/075 — prever remoção de defeitos detectados em LP e substituição de trechos flangeados ou com soldas dissimilares em aço inox</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🧗 Alpinismo</span></td><td style="font-size:12.5px;line-height:1.55">Medição de espessura em 03 regiões na base da coluna e 13 regiões ao longo da coluna e ponteira por equipe de alpinismo — 07 níveis nos niples da ponteira queimadora</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔬 LP</span></td><td style="font-size:12.5px;line-height:1.55">LP nas soldas das conexões de encaixe, flangeadas, clipes de suportação dos pilotos incluindo solda dissimilar da ponteira queimadora com coluna</td></tr>
+</tbody></table></div>
+
+<div class="card" style="margin-bottom:16px;border-left:4px solid #f9a825">
+  <div class="card-header" style="background:#fafbff">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <strong style="font-size:16px;color:#f9a825">O-2435</strong>
+        <span class="tipo-badge tipo-vaso">Vaso</span>
+        <span style="font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:10px;background:#fffde7;color:#f57f17;border:1px solid #fff176">Média</span>
+        
+        <span style="font-size:11px;color:#888">Peso: <strong>2%</strong> &nbsp;|&nbsp; Área: TOCHA 3/TE</span>
+      </div>
+      <div style="margin-top:6px;font-size:12px;color:#555;line-height:1.5">Ensaios END completos (PM + US) internos + reparos com solda</div>
+    </div>
+  </div>
+  <table class="tbl">
+    <thead><tr><th style="width:100px">Tipo</th><th>Atividade / Serviço Crítico</th></tr></thead>
+    <tbody>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔬 END</span></td><td style="font-size:12.5px;line-height:1.55">Ensaio de partículas magnéticas (GL-5) + ensaio de ultrassom (GL-5) nas soldas circunferenciais, longitudinais, bocais, BV e bota de drenagem</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">⚡ Solda</span></td><td style="font-size:12.5px;line-height:1.55">Prever remoção de descontinuidades e reparos com solda no interior do vaso após avaliação pela RPBC IE</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🎨 Pintura</span></td><td style="font-size:12.5px;line-height:1.55">Pintura interna total do vaso + pintura externa total + abas de flanges e bocais</td></tr>
+</tbody></table></div>
+
+<div class="card" style="margin-bottom:16px;border-left:4px solid #f9a825">
+  <div class="card-header" style="background:#fafbff">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <strong style="font-size:16px;color:#f9a825">O-2436</strong>
+        <span class="tipo-badge tipo-vaso">Vaso</span>
+        <span style="font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:10px;background:#fffde7;color:#f57f17;border:1px solid #fff176">Média</span>
+        
+        <span style="font-size:11px;color:#888">Peso: <strong>2%</strong> &nbsp;|&nbsp; Área: TOCHA 3/TE</span>
+      </div>
+      <div style="margin-top:6px;font-size:12px;color:#555;line-height:1.5">Ensaios END + teste hidrostático da serpentina interna (30 kgf/cm²)</div>
+    </div>
+  </div>
+  <table class="tbl">
+    <thead><tr><th style="width:100px">Tipo</th><th>Atividade / Serviço Crítico</th></tr></thead>
+    <tbody>
+<tr style="background:#fff5f5"><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">⚠ Teste Hidrostático</span></td><td style="font-size:12.5px;line-height:1.55">Efetuar teste hidrostático da serpentina de aquecimento interna com 30,00 kgf/cm²</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔬 END</span></td><td style="font-size:12.5px;line-height:1.55">Ensaio de partículas magnéticas (GL-5) + ensaio de ultrassom (GL-5) nas soldas circunferenciais, longitudinais, bocais, BV e bota de drenagem</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">⚡ Solda</span></td><td style="font-size:12.5px;line-height:1.55">Prever remoção de descontinuidades e reparos com solda no interior do vaso após avaliação pela RPBC IE</td></tr>
+</tbody></table></div>
+
+<div class="card" style="margin-bottom:16px;border-left:4px solid #f9a825">
+  <div class="card-header" style="background:#fafbff">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <strong style="font-size:16px;color:#f9a825">O-24128</strong>
+        <span class="tipo-badge tipo-vaso">Vaso</span>
+        <span style="font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:10px;background:#fffde7;color:#f57f17;border:1px solid #fff176">Média</span>
+        
+        <span style="font-size:11px;color:#888">Peso: <strong>2%</strong> &nbsp;|&nbsp; Área: TOCHA 3/TE</span>
+      </div>
+      <div style="margin-top:6px;font-size:12px;color:#555;line-height:1.5">Ensaios END completos + reparos com solda interno</div>
+    </div>
+  </div>
+  <table class="tbl">
+    <thead><tr><th style="width:100px">Tipo</th><th>Atividade / Serviço Crítico</th></tr></thead>
+    <tbody>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔬 END</span></td><td style="font-size:12.5px;line-height:1.55">PM + US internos (GL-5) nas soldas circunferenciais, longitudinais, bocais e BV</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">⚡ Solda</span></td><td style="font-size:12.5px;line-height:1.55">Reparos com solda no interior do vaso após avaliação dos resultados pela RPBC IE</td></tr>
+</tbody></table></div>
+
+<div class="card" style="margin-bottom:16px;border-left:4px solid #f9a825">
+  <div class="card-header" style="background:#fafbff">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <strong style="font-size:16px;color:#f9a825">O-24129</strong>
+        <span class="tipo-badge tipo-vaso">Vaso</span>
+        <span style="font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:10px;background:#fffde7;color:#f57f17;border:1px solid #fff176">Média</span>
+        
+        <span style="font-size:11px;color:#888">Peso: <strong>2%</strong> &nbsp;|&nbsp; Área: TOCHA 3/TE</span>
+      </div>
+      <div style="margin-top:6px;font-size:12px;color:#555;line-height:1.5">Ensaios END + PSV-24388 para manutenção e calibração + placa NR-13</div>
+    </div>
+  </div>
+  <table class="tbl">
+    <thead><tr><th style="width:100px">Tipo</th><th>Atividade / Serviço Crítico</th></tr></thead>
+    <tbody>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">🔬 END</span></td><td style="font-size:12.5px;line-height:1.55">PM + US internos (GL-5) nas soldas circunferenciais, longitudinais, bocais e BV</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">⚡ Solda</span></td><td style="font-size:12.5px;line-height:1.55">Reparos com solda no interior do vaso após avaliação da RPBC IE</td></tr>
+<tr style=""><td><span style="font-size:11px;font-weight:700;color:#3d4a7c">▸ PSV</span></td><td style="font-size:12.5px;line-height:1.55">Remover PSV-24388 para teste de recepção, inspeção, manutenção geral e calibração nas oficinas RPBC MA-ED</td></tr>
 </tbody></table></div>
     </div>
 
